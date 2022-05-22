@@ -408,7 +408,7 @@
           saida           => output(30)
        );
     
-    ULINHA31: entity work.Ula_overflow
+    ULINHA31: entity work.Ulinha_overflow
        port map(
           inputA          => inputA(31),
           inputB          => inputB(31),
