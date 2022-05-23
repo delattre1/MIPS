@@ -12,7 +12,7 @@ entity Ulinha_overflow is
 	carryIn  		 : in  std_logic;
 	carryOut 		 : out std_logic;
 	saida    		 : out std_logic;
-	resultado_adder : out std_logic
+	resultado_adder          : out std_logic
 );
 end entity;
 
