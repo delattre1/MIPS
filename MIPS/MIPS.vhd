@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity aula14 is
+entity MIPS is
 -- Total de bits das entradas e saidas
 	generic ( 
 		dataWidth        : natural := 32;
@@ -24,7 +24,7 @@ entity aula14 is
 end entity;
 
 
-architecture arquitetura of aula14 is
+architecture arquitetura of MIPS is
 	signal proxPc             : std_logic_vector (addrWidth-1 downto 0);
 	signal romAddress         : std_logic_vector (addrWidth-1 downto 0);
 	
