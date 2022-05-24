@@ -18,7 +18,7 @@ entity MIPSIntermediario is
   );
   port   (
 	LEDR            : out std_logic_vector(9 downto 0);
-        KEY             : in std_logic_vector(3 downto 0);
+   KEY             : in std_logic_vector(3 downto 0);
 	SW              : in  std_logic_vector(9 downto 0);
 	HEX0,HEX1,HEX2  : out std_logic_vector(6 downto 0);
 	HEX3,HEX4,HEX5  : out std_logic_vector(6 downto 0)
@@ -242,5 +242,9 @@ SelMuxULAMem     <= Pontos_Controle(5);
 saidaAnd         <= flagZero and Pontos_Controle(6);
 habLeituraMEM    <= Pontos_Controle(7);
 habEscritaMEM    <= Pontos_Controle(8);
+
+-- Testes
+LEDR(9) <= ULA_Out;
+LEDR(8) <= PC_Out;
 							 
 end architecture;
