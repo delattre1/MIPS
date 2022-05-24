@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ramMips IS
+entity RAMMIPS IS
    generic (
           dataWidth: natural := 32;
           addrWidth: natural := 32;
@@ -11,11 +11,11 @@ entity ramMips IS
           Endereco : IN  STD_LOGIC_VECTOR (addrWidth-1 DOWNTO 0);
           Dado_in  : in std_logic_vector(dataWidth-1 downto 0);
           Dado_out : out std_logic_vector(dataWidth-1 downto 0);
-          we : in std_logic := '0'
+          habEscritaMEM, habLeituraMEM, habilita : in std_logic
         );
 end entity;
 
-architecture assincrona OF ramMips IS
+architecture assincrona OF RAMMIPS IS
   type blocoMemoria IS ARRAY(0 TO 2**memoryAddrWidth - 1) OF std_logic_vector(dataWidth-1 DOWNTO 0);
 
   signal memRAM: blocoMemoria;
@@ -35,13 +35,13 @@ begin
   process(clk)
   begin
       if(rising_edge(clk)) then
-          if(we = '1') then
+          if(habEscritaMEM = '1' and habilita='1') then
               memRAM(to_integer(unsigned(EnderecoLocal))) <= Dado_in;
           end if;
       end if;
   end process;
 
   -- A leitura deve ser sempre assincrona:
-  Dado_out <= memRAM(to_integer(unsigned(EnderecoLocal)));
+  Dado_out <= memRAM(to_integer(unsigned(EnderecoLocal))) when (habLeituraMEM = '1' and habilita='1') else (others => 'Z');
 
 end architecture;

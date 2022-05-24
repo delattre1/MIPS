@@ -1,0 +1,17 @@
+Conjunto de instruções do grupo A
+
+- Referencia a memoria
+    - Carrega palavra (load word; lw)
+    - Armazena palavra (store word; sw)
+
+- Logico-aritmeticas
+    - Soma (add)
+    - Subtração (sub)
+    - E lógico (and)
+    - OU lógico (or)
+    - Comparação menr que (set if less; slt)
+
+- Desvio
+    - Desvio se igual (branch equal; beq)
+    - Desvio incondicional (jump; j)
+
