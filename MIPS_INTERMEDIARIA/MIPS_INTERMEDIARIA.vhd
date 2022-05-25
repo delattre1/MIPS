@@ -14,20 +14,24 @@ entity MIPS_INTERMEDIARIA is
           larguraImediatoJump : natural := 26;
           larguraUlaCtrl      : natural := 3;
           larguraFunct        : natural := 6;
-          simulacao	         : boolean := TRUE	-- para gravar na placa, altere de TRUE para FALSE
+          simulacao	         : boolean := FALSE	-- para gravar na placa, altere de TRUE para FALSE
   );
   port   (
 	LEDR            : out std_logic_vector(9 downto 0);
    KEY             : in  std_logic_vector(3 downto 0);
 	SW              : in  std_logic_vector(9 downto 0);
 	HEX0,HEX1,HEX2  : out std_logic_vector(6 downto 0);
-	HEX3,HEX4,HEX5  : out std_logic_vector(6 downto 0)
+	HEX3,HEX4,HEX5  : out std_logic_vector(6 downto 0);
 	-- Debug signals
-	--ULA_DEBUG       : out std_logic_vector(larguraDados-1 downto 0);
-	--PC_DEBUG        : out std_logic_vector(larguraDados-1 downto 0);
-	--WE_DEBUG, RE_DEBUG, BEQ_DEBUG, SelMuxJMP_DEBUG, AND_DBG : out std_logic;
-	--INA_ULA_DBG, INB_ULA_DBG : out std_logic_vector(larguraDados-1 downto 0);
-	--RS_DEBUG, RT_DEBUG, RD_DEBUG : out std_logic_vector(larguraAddrRegs-1 downto 0)
+	ULA_DEBUG       : out std_logic_vector(larguraDados-1 downto 0);
+	PC_DEBUG        : out std_logic_vector(larguraDados-1 downto 0);
+        AND_DBG         : out std_logic;
+	-- WE_DEBUG, RE_DEBUG, BEQ_DEBUG, SelMuxJMP_DEBUG, AND_DBG : out std_logic;
+	INA_ULA_DBG, INB_ULA_DBG : out std_logic_vector(larguraDados-1 downto 0);
+	RS_DEBUG, RT_DEBUG, RD_DEBUG : out std_logic_vector(larguraAddrRegs-1 downto 0);
+        ZERO_DEBUG :out std_logic;
+        OPCODE_DEBUG : out std_logic_vector(5 downto 0);
+        SAIDA_BANCO_B : out std_logic_vector(larguraDados-1 downto 0)
 
   );
 end entity;
@@ -110,7 +114,7 @@ begin
 CLK <= KEY(0);
 
 -- Instanciando os componentes:
--- ===== ULA =======:
+-- ========================= ULA ======================================:
 MUX_UlaCtrl:  entity work.muxGenerico2x1  generic map (larguraDados => larguraUlaCtrl)
         port map( entradaA_MUX => decoderULAOpcodeOut,
                   entradaB_MUX =>  decoderULAFunctOut,
@@ -132,6 +136,7 @@ ULA : entity work.ULAMIPS  generic map(larguraDados => larguraDados)
                 output          => ULA_Out,
                 flagZero        => flagZero
         );
+-- ========================= ULA ======================================
 
 -- ===== Program Counter =======:
 PC : entity work.registradorGenerico   generic map (larguraDados => larguraDados)
@@ -144,14 +149,6 @@ incrementaPC :  entity work.somaConstante generic map (larguraDados => larguraDa
 -- ===== Decoder =======:
 decoder : entity work.decoderGenerico
         port map (Opcode => Opcode, Output => Pontos_Controle);
-
--- -- ===== Shift Left Jump =======:
--- shiftLeftJump : entity work.ShiftLeftJump generic map (larguraDados => larguraImediatoJump)
---         port map (DataInput => ROM_Out(25 downto 0), DataOutput => imediatoComShiftJump);
-
--- -- ===== Shift Left Imediato =======:
--- shiftLeftImediato: entity work.ShiftLeftImediato generic map (larguraDados => larguraDados)
---         port map (DataInput => sinalExtendido, DataOutput => imediatoComShift);
 
 -- ===== Somador =======:
 somadorImediato :  entity work.somadorGenerico  generic map (larguraDados => larguraDados)
@@ -231,7 +228,8 @@ MUX_EstendeSinal :  entity work.muxGenerico2x1  generic map (larguraDados => lar
                  seletor_MUX => saidaAnd,
                  saida_MUX => saidaMuxEstendeSinal);
 -- ========================= MUX ========================================				 
--- Shift left Imediato e Jump
+
+-- ===== Shift left Jump e Imediato =======:
 extendidoShiftLeft(31 downto 2) <= sinalExtendido(29 downto 0);
 extendidoShiftLeft(1 downto 0)  <= "00";
 
@@ -239,7 +237,7 @@ imediatoShiftLeft(31 downto 28) <= saidaIncrementaPc(31 downto 28);
 imediatoShiftLeft(27 downto 2)  <= ImediatoJump(25 downto 0);
 imediatoShiftLeft(1 downto 0)   <= "00";
 
--- Instanciando os pontos de controle:
+-- ===== Instanciando os pontos de controle =======:
 SelMuxPc         <= Pontos_Controle(0);
 SelMuxRtRd       <= Pontos_Controle(1);
 habEscritaReg    <= Pontos_Controle(2);
@@ -250,20 +248,43 @@ saidaAnd         <= flagZero and Pontos_Controle(6);
 habLeituraMEM    <= Pontos_Controle(7);
 habEscritaMEM    <= Pontos_Controle(8);
 
+-- ===== Decoders binarios para HEX =======:
+decoder_binario0 : entity work.conversorHex7Seg 
+          port map (dadoHex => saidaMuxResultados(3 downto 0), apaga => '0', negativo => '0', overFlow => '0', saida7seg => HEX0);		 
+
+decoder_binario1 : entity work.conversorHex7Seg 
+          port map (dadoHex => saidaMuxResultados(7 downto 4), apaga => '0', negativo => '0', overFlow => '0', saida7seg => HEX1);		 
+
+decoder_binario2 : entity work.conversorHex7Seg 
+          port map (dadoHex => saidaMuxResultados(11 downto 8), apaga => '0', negativo => '0', overFlow => '0', saida7seg => HEX2);		 
+
+decoder_binario3 : entity work.conversorHex7Seg 
+          port map (dadoHex => saidaMuxResultados(15 downto 12), apaga => '0', negativo => '0', overFlow => '0', saida7seg => HEX3);		 
+
+decoder_binario4 : entity work.conversorHex7Seg 
+          port map (dadoHex => saidaMuxResultados(19 downto 16), apaga => '0', negativo => '0', overFlow => '0', saida7seg => HEX4);		 
+
+decoder_binario5 : entity work.conversorHex7Seg 
+          port map (dadoHex => saidaMuxResultados(23 downto 20), apaga => '0', negativo => '0', overFlow => '0', saida7seg => HEX5);		 
+
+-- ===== Declarando valores dos LEDS =======:
+LEDR(3 downto 0) <= saidaMuxResultados(27 downto 24);
+LEDR(7 downto 4) <= saidaMuxResultados(31 downto 28);
+
 -- Testes
---ULA_DEBUG <= ULA_Out;
---PC_DEBUG  <= PC_Out;
---RE_DEBUG  <= habLeituraMEM;
---WE_DEBUG  <= habEscritaMEM;
---BEQ_DEBUG <= Pontos_Controle(6);
---SelMuxJMP_DEBUG <= Pontos_Controle(0);
---INA_ULA_DBG <= Regs_ULA_A;
---INB_ULA_DBG <= saidaMuxRtImediato;
---AND_DBG     <= saidaAnd;
---RS_DEBUG    <= RegSAddr;
---RT_DEBUG    <= RegTAddr;
---RD_DEBUG    <= RegDAddr;
-						 
-							 
-							 
+ULA_DEBUG <= ULA_Out;
+PC_DEBUG  <= PC_Out;
+-- RE_DEBUG  <= habLeituraMEM;
+-- WE_DEBUG  <= habEscritaMEM;
+-- BEQ_DEBUG <= Pontos_Controle(6);
+-- SelMuxJMP_DEBUG <= Pontos_Controle(0);
+INA_ULA_DBG <= Regs_ULA_A;
+INB_ULA_DBG <= saidaMuxRtImediato;
+AND_DBG     <= saidaAnd;
+RS_DEBUG    <= RegSAddr;
+RT_DEBUG    <= RegTAddr;
+RD_DEBUG    <= RegDAddr;				 		
+ZERO_DEBUG  <= flagZero;
+OPCODE_DEBUG <= ROM_Out(31 downto 26);
+SAIDA_BANCO_B  <= Regt_ULA_B;
 end architecture;
