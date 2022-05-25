@@ -13,7 +13,7 @@ entity bancoRegistradores is
 -- Leitura de 2 registradores e escrita em 1 registrador simultaneamente.
     port
     (
-        clk        : in std_logic;
+        clk             : in std_logic;
 --
         enderecoA       : in std_logic_vector((larguraEndBancoRegs-1) downto 0);
         enderecoB       : in std_logic_vector((larguraEndBancoRegs-1) downto 0);
