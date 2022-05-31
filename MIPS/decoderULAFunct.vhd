@@ -22,7 +22,7 @@ begin
             "001" when (Funct = PL_OR) else
             "010" when (Funct = ADD) else
             "110" when (Funct = SUB) else
-            "111" when (Funct = SLT) else
+            "111" when (Funct = SLT) else 
             "000";
 	
 end architecture;

@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity muxGenerico4x1_1bit is
+entity muxGenerico4x1 is
   port (
     inA_MUX, inB_MUX, inC_MUX, inD_MUX : in std_logic;
     sel_MUX     :  in std_logic_vector(1 downto 0);
@@ -9,7 +9,7 @@ entity muxGenerico4x1_1bit is
   );
 end entity;
 
-architecture comportamento of muxGenerico4x1_1bit is
+architecture comportamento of muxGenerico4x1 is
   begin
   
     saida_MUX <= inA_MUX when (sel_MUX = "00") else 

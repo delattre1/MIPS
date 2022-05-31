@@ -47,7 +47,7 @@ function initMemory
     end initMemory;
 	 
     -- Declaracao dos registradores:
-    shared variable registrador : memoria_t;
+    shared variable registrador : memoria_t := initMemory;
     constant zero : std_logic_vector(larguraDados-1 downto 0) := (others => '0');
 begin
     process(clk) is

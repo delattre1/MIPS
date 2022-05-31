@@ -1,0 +1,43 @@
+Quartus Prime Archive log --	E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/MIPS_INTERMEDIARIA.qarlog
+
+Archive:	E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/MIPS_INTERMEDIARIA.qar
+Date:		Wed May 25 15:19:46 2022
+Quartus Prime		20.1.0 Build 711 06/05/2020 SJ Lite Edition
+
+	=========== Files Selected: ===========
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/MIPS_INTERMEDIARIA.qpf
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/MIPS_INTERMEDIARIA.qsf
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/MIPS_INTERMEDIARIA.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/ROMcontent.mif
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/ShiftLeftImediato.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/ShiftLeftJump.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/ULAMips.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/ULASomaSub.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/Ulinha.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/Ulinha_overflow.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/bancoRegistradores.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/conversorHex7Seg.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/decoderGenerico.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/decoderULAFunct.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/decoderULAOpcode.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/edgeDetector.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/estendeSinalGenerico.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/muxGenerico2x1.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/muxGenerico2x1_1bit.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/muxGenerico4x1.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/muxGenerico4x1_1bit.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/output_files/Waveform.vwf
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/output_files/Waveform1.vwf
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/output_files/Waveform2.vwf
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/output_files/Waveform3.vwf
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/ramMips.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/registradorGenerico.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/romMips.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/somaConstante.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/somadorGenerico.vhd
+E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/somadorGenerico_1bit.vhd
+e:/aplicativos/quartus/quartus/bin64/assignment_defaults.qdf
+	======= Total: 32 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

@@ -1,0 +1,108 @@
+Archive Project report for MIPS_INTERMEDIARIA
+Wed May 25 15:19:46 2022
+Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Archive Project Summary
+  3. Archive Project Messages
+  4. Files Archived
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------+
+; Archive Project Summary                                        ;
++------------------------+---------------------------------------+
+; Archive Project Status ; Successful - Wed May 25 15:19:46 2022 ;
+; Revision Name          ; MIPS_INTERMEDIARIA                    ;
+; Top-level Entity Name  ; MIPS_INTERMEDIARIA                    ;
+; Family                 ; Cyclone V                             ;
++------------------------+---------------------------------------+
+
+
++--------------------------+
+; Archive Project Messages ;
++--------------------------+
+Info: File Set 'Source control' contains:
+    Info: Project source and settings files
+    Info: Automatically detected source files
+Warning: Hierarchical Platform Designer systems and custom IP components(_hw.tcl and associated files) are not archived by the Quartus Archiver
+Info: Archive will store files relative to the closest common parent directory
+Info (13213): Using common directory E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/
+Info: ----------------------------------------------------------
+Info: ----------------------------------------------------------
+Info: Generated archive 'E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/MIPS_INTERMEDIARIA.qar'
+Info: ----------------------------------------------------------
+Info: ----------------------------------------------------------
+Info: Generated report 'MIPS_INTERMEDIARIA.archive.rpt'
+Info (23030): Evaluation of Tcl script e:/aplicativos/quartus/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4823 megabytes
+    Info: Processing ended: Wed May 25 15:19:46 2022
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++--------------------------------------------------------------+
+; Files Archived                                               ;
++--------------------------------------------------------------+
+; File Name                                                    ;
++--------------------------------------------------------------+
+; bancoRegistradores.vhd                                       ;
+; conversorHex7Seg.vhd                                         ;
+; decoderGenerico.vhd                                          ;
+; decoderULAFunct.vhd                                          ;
+; decoderULAOpcode.vhd                                         ;
+; e:/aplicativos/quartus/quartus/bin64/assignment_defaults.qdf ;
+; edgeDetector.vhd                                             ;
+; estendeSinalGenerico.vhd                                     ;
+; MIPS_INTERMEDIARIA.qpf                                       ;
+; MIPS_INTERMEDIARIA.qsf                                       ;
+; MIPS_INTERMEDIARIA.vhd                                       ;
+; muxGenerico2x1.vhd                                           ;
+; muxGenerico2x1_1bit.vhd                                      ;
+; muxGenerico4x1.vhd                                           ;
+; muxGenerico4x1_1bit.vhd                                      ;
+; output_files/Waveform.vwf                                    ;
+; output_files/Waveform1.vwf                                   ;
+; output_files/Waveform2.vwf                                   ;
+; output_files/Waveform3.vwf                                   ;
+; ramMips.vhd                                                  ;
+; registradorGenerico.vhd                                      ;
+; ROMcontent.mif                                               ;
+; romMips.vhd                                                  ;
+; ShiftLeftImediato.vhd                                        ;
+; ShiftLeftJump.vhd                                            ;
+; somaConstante.vhd                                            ;
+; somadorGenerico.vhd                                          ;
+; somadorGenerico_1bit.vhd                                     ;
+; ULAMips.vhd                                                  ;
+; ULASomaSub.vhd                                               ;
+; Ulinha.vhd                                                   ;
+; Ulinha_overflow.vhd                                          ;
++--------------------------------------------------------------+
+
+

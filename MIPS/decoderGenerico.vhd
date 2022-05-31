@@ -36,7 +36,7 @@ begin
 	SelMuxRtRd <= '1' when (Opcode = TipoR) else '0';
 
   -- Habilita Escrita Reg 3 (Banco de registadores)
-	habEscritaReg <= '0' when (Opcode = SW) else '1';
+	habEscritaReg <= '0' when (Opcode = SW or Opcode = BEQ) else '1';
 
   -- SelMuxRtImediato
 	SelMuxRtImediato <= '1' when (Opcode = LW or Opcode = SW) else '0';

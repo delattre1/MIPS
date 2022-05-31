@@ -14,14 +14,21 @@ entity MIPSIntermediario is
           larguraImediatoJump : natural := 26;
           larguraUlaCtrl      : natural := 3;
           larguraFunct        : natural := 6;
-          simulacao	      : boolean := TRUE	-- para gravar na placa, altere de TRUE para FALSE
+          simulacao	         : boolean := TRUE	-- para gravar na placa, altere de TRUE para FALSE
   );
   port   (
 	LEDR            : out std_logic_vector(9 downto 0);
-   KEY             : in std_logic_vector(3 downto 0);
+   KEY             : in  std_logic_vector(3 downto 0);
 	SW              : in  std_logic_vector(9 downto 0);
 	HEX0,HEX1,HEX2  : out std_logic_vector(6 downto 0);
-	HEX3,HEX4,HEX5  : out std_logic_vector(6 downto 0)
+	HEX3,HEX4,HEX5  : out std_logic_vector(6 downto 0);
+	-- Debug signals
+	ULA_DEBUG       : out std_logic_vector(larguraDados-1 downto 0);
+	PC_DEBUG        : out std_logic_vector(larguraDados-1 downto 0);
+	WE_DEBUG, RE_DEBUG, BEQ_DEBUG, SelMuxJMP_DEBUG, AND_DBG : out std_logic;
+	INA_ULA_DBG, INB_ULA_DBG : out std_logic_vector(larguraDados-1 downto 0);
+	RS_DEBUG, RT_DEBUG, RD_DEBUG : out std_logic_vector(larguraAddrRegs-1 downto 0)
+
   );
 end entity;
 
@@ -192,9 +199,9 @@ MUX_Prox_PC :  entity work.muxGenerico2x1  generic map (larguraDados => larguraD
 -- ===== MUX(Rt/Rd) =======:	
 MUX_RtRd :  entity work.muxGenerico2x1  generic map (larguraDados => larguraAddrRegs)
         port map( entradaA_MUX => RegTAddr,
-                 entradaB_MUX =>  RegDAddr,
-                 seletor_MUX => SelMuxRtRd,
-                 saida_MUX => saidaMuxRtRd);
+                  entradaB_MUX => RegDAddr,
+                  seletor_MUX  => SelMuxRtRd,
+                  saida_MUX    => saidaMuxRtRd);
 					  
 -- ===== MUX(Rt/Imediato) =======:	
 MUX_RtImediato :  entity work.muxGenerico2x1  generic map (larguraDados => larguraDados)
@@ -244,7 +251,19 @@ habLeituraMEM    <= Pontos_Controle(7);
 habEscritaMEM    <= Pontos_Controle(8);
 
 -- Testes
-LEDR(9) <= ULA_Out;
-LEDR(8) <= PC_Out;
+ULA_DEBUG <= ULA_Out;
+PC_DEBUG  <= PC_Out;
+RE_DEBUG  <= habLeituraMEM;
+WE_DEBUG  <= habEscritaMEM;
+BEQ_DEBUG <= Pontos_Controle(6);
+SelMuxJMP_DEBUG <= Pontos_Controle(0);
+INA_ULA_DBG <= Regs_ULA_A;
+INB_ULA_DBG <= saidaMuxRtImediato;
+AND_DBG     <= saidaAnd;
+RS_DEBUG    <= RegSAddr;
+RT_DEBUG    <= RegTAddr;
+RD_DEBUG    <= RegDAddr;
+						 
+							 
 							 
 end architecture;

@@ -25,6 +25,7 @@ entity MIPS_INTERMEDIARIA is
 	-- Debug signals
 	ULA_DEBUG       : out std_logic_vector(larguraDados-1 downto 0);
 	PC_DEBUG        : out std_logic_vector(larguraDados-1 downto 0);
+<<<<<<< HEAD
         AND_DBG         : out std_logic;
 	-- WE_DEBUG, RE_DEBUG, BEQ_DEBUG, SelMuxJMP_DEBUG, AND_DBG : out std_logic;
 	INA_ULA_DBG, INB_ULA_DBG : out std_logic_vector(larguraDados-1 downto 0);
@@ -32,6 +33,15 @@ entity MIPS_INTERMEDIARIA is
         ZERO_DEBUG :out std_logic;
         OPCODE_DEBUG : out std_logic_vector(5 downto 0);
         SAIDA_BANCO_B : out std_logic_vector(larguraDados-1 downto 0)
+=======
+	WE_DEBUG, RE_DEBUG  	: out std_logic;
+	--BEQ_DEBUG, SelMuxJMP_DEBUG, AND_DBG : out std_logic;
+	INA_ULA_DBG, INB_ULA_DBG : out std_logic_vector(larguraDados-1 downto 0);
+	--RS_DEBUG, RT_DEBUG, RD_DEBUG : out std_logic_vector(larguraAddrRegs-1 downto 0)
+	outBbancoREG_DBG, writeBancoC_DBG : out std_logic_vector(larguraDados-1 downto 0);
+	SelMuxRtImediato_DBG : out std_logic
+	 
+>>>>>>> d6c11f1697a215264798d06bbb0422e53076ae7a
 
   );
 end entity;
@@ -274,6 +284,7 @@ LEDR(7 downto 4) <= saidaMuxResultados(31 downto 28);
 -- Testes
 ULA_DEBUG <= ULA_Out;
 PC_DEBUG  <= PC_Out;
+<<<<<<< HEAD
 -- RE_DEBUG  <= habLeituraMEM;
 -- WE_DEBUG  <= habEscritaMEM;
 -- BEQ_DEBUG <= Pontos_Controle(6);
@@ -287,4 +298,20 @@ RD_DEBUG    <= RegDAddr;
 ZERO_DEBUG  <= flagZero;
 OPCODE_DEBUG <= ROM_Out(31 downto 26);
 SAIDA_BANCO_B  <= Regt_ULA_B;
+=======
+RE_DEBUG  <= habLeituraMEM;
+WE_DEBUG  <= habEscritaMEM;
+--BEQ_DEBUG <= Pontos_Controle(6);
+--SelMuxJMP_DEBUG <= Pontos_Controle(0);
+INA_ULA_DBG <= Regs_ULA_A;
+INB_ULA_DBG <= saidaMuxRtImediato;
+--AND_DBG     <= saidaAnd;
+--RS_DEBUG    <= RegSAddr;
+--RT_DEBUG    <= RegTAddr;
+--RD_DEBUG    <= RegDAddr;
+outBbancoREG_DBG <= Regt_ULA_B;
+SelMuxRtImediato_DBG <= SelMuxRtImediato;
+writeBancoC_DBG      <= saidaMuxULAMem;
+							 
+>>>>>>> d6c11f1697a215264798d06bbb0422e53076ae7a
 end architecture;
