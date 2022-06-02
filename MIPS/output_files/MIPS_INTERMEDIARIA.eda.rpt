@@ -1,5 +1,5 @@
 EDA Netlist Writer report for MIPS_INTERMEDIARIA
-Wed May 25 15:14:36 2022
+Thu Jun  2 20:25:23 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -37,9 +37,9 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Wed May 25 15:14:36 2022 ;
+; EDA Netlist Writer Status ; Successful - Thu Jun  2 20:25:23 2022 ;
 ; Revision Name             ; MIPS_INTERMEDIARIA                    ;
-; Top-level Entity Name     ; MIPS_INTERMEDIARIA                    ;
+; Top-level Entity Name     ; MIPS_FINAL                            ;
 ; Family                    ; Cyclone V                             ;
 ; Simulation Files Creation ; Successful                            ;
 +---------------------------+---------------------------------------+
@@ -66,13 +66,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------------------------------+------------------------+
 
 
-+-------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                      ;
-+-------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                 ;
-+-------------------------------------------------------------------------------------------------+
-; E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/simulation/modelsim/MIPS_INTERMEDIARIA.vho ;
-+-------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------+
+; Simulation Generated Files                                        ;
++-------------------------------------------------------------------+
+; Generated Files                                                   ;
++-------------------------------------------------------------------+
+; /home/daniel/MIPS/MIPS/simulation/modelsim/MIPS_INTERMEDIARIA.vho ;
++-------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -81,13 +81,13 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Wed May 25 15:14:35 2022
+    Info: Processing started: Thu Jun  2 20:25:20 2022
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off MIPS_INTERMEDIARIA -c MIPS_INTERMEDIARIA
-Info (204019): Generated file MIPS_INTERMEDIARIA.vho in folder "E:/Documents/Insper/DesComp/descomp_aulas/MIPS_Inter/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_INTERMEDIARIA.vho in folder "/home/daniel/MIPS/MIPS/simulation/modelsim/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4742 megabytes
-    Info: Processing ended: Wed May 25 15:14:36 2022
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Peak virtual memory: 701 megabytes
+    Info: Processing ended: Thu Jun  2 20:25:23 2022
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:03
 
 

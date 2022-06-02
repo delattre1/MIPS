@@ -15,14 +15,15 @@ architecture arch_name of decoderULAFunct is
   constant SLT    : std_logic_vector(5 downto 0) := "101010";
   constant PL_AND : std_logic_vector(5 downto 0) := "100100";
   constant PL_OR  : std_logic_vector(5 downto 0) := "100101";
+
   
 begin
 	
-	Output <= "000" when (Funct = PL_AND) else 
-            "001" when (Funct = PL_OR) else
-            "010" when (Funct = ADD) else
-            "110" when (Funct = SUB) else
-            "111" when (Funct = SLT) else 
-            "000";
+	Output <= "000"  when (Funct = PL_AND) else 
+             "001"  when (Funct = PL_OR)  else
+             "010"  when (Funct = ADD)    else
+             "110"  when (Funct = SUB)    else
+             "111"  when (Funct = SLT)    else 
+             "000";
 	
 end architecture;

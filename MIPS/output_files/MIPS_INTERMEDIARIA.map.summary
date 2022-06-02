@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Wed May 25 15:12:48 2022
+Analysis & Synthesis Status : Successful - Thu Jun  2 20:24:13 2022
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : MIPS_INTERMEDIARIA
-Top-level Entity Name : MIPS_INTERMEDIARIA
+Top-level Entity Name : MIPS_FINAL
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 2334
+Total registers : 3426
 Total pins : 66
 Total virtual pins : 0
 Total block memory bits : 0
