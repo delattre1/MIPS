@@ -21,16 +21,16 @@ entity MIPS_INTERMEDIARIA is
    KEY             : in  std_logic_vector(3 downto 0);
 	SW              : in  std_logic_vector(9 downto 0);
 	HEX0,HEX1,HEX2  : out std_logic_vector(6 downto 0);
-	HEX3,HEX4,HEX5  : out std_logic_vector(6 downto 0);
+	HEX3,HEX4,HEX5  : out std_logic_vector(6 downto 0)
 	-- Debug signals
-	ULA_DEBUG       : out std_logic_vector(larguraDados-1 downto 0);
-	PC_DEBUG        : out std_logic_vector(larguraDados-1 downto 0);
-	WE_DEBUG, RE_DEBUG  	: out std_logic;
+	--ULA_DEBUG       : out std_logic_vector(larguraDados-1 downto 0);
+	--PC_DEBUG        : out std_logic_vector(larguraDados-1 downto 0);
+	--WE_DEBUG, RE_DEBUG  	: out std_logic;
 	--BEQ_DEBUG, SelMuxJMP_DEBUG, AND_DBG : out std_logic;
-	INA_ULA_DBG, INB_ULA_DBG : out std_logic_vector(larguraDados-1 downto 0);
+	--INA_ULA_DBG, INB_ULA_DBG : out std_logic_vector(larguraDados-1 downto 0);
 	--RS_DEBUG, RT_DEBUG, RD_DEBUG : out std_logic_vector(larguraAddrRegs-1 downto 0)
-	outBbancoREG_DBG, writeBancoC_DBG : out std_logic_vector(larguraDados-1 downto 0);
-	SelMuxRtImediato_DBG : out std_logic
+	--outBbancoREG_DBG, writeBancoC_DBG : out std_logic_vector(larguraDados-1 downto 0);
+	--SelMuxRtImediato_DBG : out std_logic
 	 
 
   );
@@ -40,6 +40,7 @@ end entity;
 architecture arquitetura of MIPS_INTERMEDIARIA is
   -- CLK --
   signal CLK                  : std_logic;
+
   
   -- Pontos de Controle --
   signal Pontos_Controle      : std_logic_vector(8 downto 0);
@@ -118,8 +119,8 @@ CLK <= KEY(0);
 MUX_UlaCtrl:  entity work.muxGenerico2x1  generic map (larguraDados => larguraUlaCtrl)
         port map( entradaA_MUX => decoderULAOpcodeOut,
                   entradaB_MUX =>  decoderULAFunctOut,
-                  seletor_MUX => ULAop,
-                  saida_MUX => ULAcrtl);
+                  seletor_MUX  => ULAop,
+                  saida_MUX    => ULAcrtl);
 
 decoderULAOpcode : entity work.decoderULAOpcode
 	port map (Opcode => ROM_Out(31 downto 26), Output => decoderULAOpcodeOut);
@@ -195,10 +196,10 @@ estendeSinal : entity work.estendeSinalGenerico   generic map (larguraDadoEntrad
 -- ========================= MUX ========================================:	
 -- ===== MUX([PC+4, BEQ]/Jmp) =======:	
 MUX_Prox_PC :  entity work.muxGenerico2x1  generic map (larguraDados => larguraDados)
-        port map( entradaA_MUX => saidaMuxEstendeSinal,
-                 entradaB_MUX =>  imediatoShiftLeft,
-                 seletor_MUX => SelMuxPc,
-                 saida_MUX => saidaMuxPc);
+        port map(entradaA_MUX  => saidaMuxEstendeSinal,
+                 entradaB_MUX  => imediatoShiftLeft,
+                 seletor_MUX   => SelMuxPc,
+                 saida_MUX     => saidaMuxPc);
 					  
 -- ===== MUX(Rt/Rd) =======:	
 MUX_RtRd :  entity work.muxGenerico2x1  generic map (larguraDados => larguraAddrRegs)
@@ -210,31 +211,59 @@ MUX_RtRd :  entity work.muxGenerico2x1  generic map (larguraDados => larguraAddr
 -- ===== MUX(Rt/Imediato) =======:	
 MUX_RtImediato :  entity work.muxGenerico2x1  generic map (larguraDados => larguraDados)
         port map( entradaA_MUX => Regt_ULA_B,
-                 entradaB_MUX =>  sinalExtendido,
-                 seletor_MUX => SelMuxRtImediato,
-                 saida_MUX => saidaMuxRtImediato);
+                 entradaB_MUX  =>  sinalExtendido,
+                 seletor_MUX   => SelMuxRtImediato,
+                 saida_MUX     => saidaMuxRtImediato);
 
 -- ===== MUX(Mostrar PC e ULA nos HEX) =======:	
 MUX_Resultados :  entity work.muxGenerico2x1  generic map (larguraDados => larguraDados)
         port map( entradaA_MUX => PC_Out,
-                 entradaB_MUX =>  ULA_Out,
-                 seletor_MUX => SW(0),
-                 saida_MUX => saidaMuxResultados);
+                 entradaB_MUX  => ULA_Out,
+                 seletor_MUX   => SW(0),
+                 saida_MUX     => saidaMuxResultados);
 					  
 -- ===== MUX(ULA/memoria) =======:	
 MUX_ULAMemoria :  entity work.muxGenerico2x1  generic map (larguraDados => larguraDados)
         port map( entradaA_MUX => ULA_Out,
-                 entradaB_MUX =>  RAM_Out,
-                 seletor_MUX => SelMuxULAMem,
-                 saida_MUX => saidaMuxULAMem);
+                 entradaB_MUX  => RAM_Out,
+                 seletor_MUX   => SelMuxULAMem,
+                 saida_MUX     => saidaMuxULAMem);
 					  
 -- ===== MUX(Estende Sinal) =======:	
 MUX_EstendeSinal :  entity work.muxGenerico2x1  generic map (larguraDados => larguraDados)
         port map( entradaA_MUX => saidaIncrementaPc,
-                 entradaB_MUX =>  saidaSomadorImediato,
-                 seletor_MUX => saidaAnd,
-                 saida_MUX => saidaMuxEstendeSinal);
+                 entradaB_MUX  => saidaSomadorImediato,
+                 seletor_MUX   => saidaAnd,
+                 saida_MUX     => saidaMuxEstendeSinal);
 -- ========================= MUX ========================================				 
+
+monitor: work.debugMonitor
+      port map(PC        => PC_Out,
+            Instrucao    => ROM_Out,
+            LeituraRS    => Regs_ULA_A,
+            LeituraRT    => Regt_ULA_B,
+            EscritaRD    => saidaMuxULAMem,
+            EntradaB_ULA => saidaMuxRtImediato,
+            imediatoEstendido => sinalExtendido,
+            saidaULA          => ULA_Out,
+            dadoLido_RAM      => RAM_Out,
+            proxPC            => saidaIncrementaPc,
+            MUXProxPCEntradaA => saidaMuxEstendeSinal,
+            MUXProxPCEntradaB => imediatoShiftLeft,
+            ULActrl           => '0' & ULAcrtl,
+            zeroFLAG          => flagZero,
+            escreveC          => habEscritaReg,
+            MUXPCBEQJUMP      => saidaAnd,
+            MUXRTRD           => SelMuxRtRd,
+            MUXRTIMED         => SelMuxRtImediato,
+            MUXULAMEM         => SelMuxULAMem,
+            iBEQ              => Pontos_Controle(6),
+            WR                => habEscritaMEM,
+            RD                => habLeituraMEM,
+            --Output
+            clkTCL 				=> open);
+
+
 -- Shift left Imediato e Jump
 extendidoShiftLeft(31 downto 2) <= sinalExtendido(29 downto 0);
 extendidoShiftLeft(1 downto 0)  <= "00";
@@ -255,20 +284,20 @@ habLeituraMEM    <= Pontos_Controle(7);
 habEscritaMEM    <= Pontos_Controle(8);
 
 -- Testes
-ULA_DEBUG <= ULA_Out;
-PC_DEBUG  <= PC_Out;
-RE_DEBUG  <= habLeituraMEM;
-WE_DEBUG  <= habEscritaMEM;
+--ULA_DEBUG <= ULA_Out;
+--PC_DEBUG  <= PC_Out;
+--RE_DEBUG  <= habLeituraMEM;
+--WE_DEBUG  <= habEscritaMEM;
 --BEQ_DEBUG <= Pontos_Controle(6);
 --SelMuxJMP_DEBUG <= Pontos_Controle(0);
-INA_ULA_DBG <= Regs_ULA_A;
-INB_ULA_DBG <= saidaMuxRtImediato;
+--INA_ULA_DBG <= Regs_ULA_A;
+--INB_ULA_DBG <= saidaMuxRtImediato;
 --AND_DBG     <= saidaAnd;
 --RS_DEBUG    <= RegSAddr;
 --RT_DEBUG    <= RegTAddr;
 --RD_DEBUG    <= RegDAddr;
-outBbancoREG_DBG <= Regt_ULA_B;
-SelMuxRtImediato_DBG <= SelMuxRtImediato;
-writeBancoC_DBG      <= saidaMuxULAMem;
+--outBbancoREG_DBG <= Regt_ULA_B;
+--SelMuxRtImediato_DBG <= SelMuxRtImediato;
+--writeBancoC_DBG      <= saidaMuxULAMem;
 							 
 end architecture;
